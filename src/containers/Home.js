@@ -14,20 +14,20 @@ export default class Home extends Component {
         };
     }
 
-    // async componentDidMount() {
-    //     if (!this.props.isAuthenticated) {
-    //         return;
-    //     }
+    async componentDidMount() {
+        if (!this.props.isAuthenticated) {
+            return;
+        }
 
-    //     try {
-    //         const notes = await this.notes();
-    //         this.setState({ notes });
-    //     } catch (e) {
-    //         alert(e);
-    //     }
+        try {
+            const notes = await this.notes();
+            this.setState({ notes });
+        } catch (e) {
+            alert(e);
+        }
 
-    //     this.setState({ isLoading: false });
-    // }
+        this.setState({ isLoading: false });
+    }
 
     notes() {
         return API.get("notes", "/notes");
@@ -81,7 +81,7 @@ export default class Home extends Component {
     render() {
         return (
             <div className="Home">
-                {this.props.isAuthenticated ? 'signed in' : this.renderLander()}
+                {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
             </div>
         );
     }
